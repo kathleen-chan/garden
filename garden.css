@@ -1,0 +1,96 @@
+.manjari-regular {
+  font-family: "Manjari", sans-serif;
+  color: #2c6e49;
+  font-size: 3.5rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+    background-color: #d4e09b;
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    transition: background-color 1s ease;
+}
+
+.game-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: opacity 1s ease;
+}
+
+#menu, #new-garden-pg, #growing-gardens-pg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;  /* Doesn't initially display */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.enter {
+    font-family: "Dongle", sans-serif;
+    font-size: 2.5rem;
+    color: #4c956c;
+    background-color: #f6f4d2;
+    border: none;
+    border-radius: 50px;  /* Rounded corners */
+    padding: 2px 40px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.enter:hover {
+    color: #f6f4d2;
+    background-color: #7fb685;
+    transform: translateY(-2px);
+}
+
+.menu-item {
+    font-family: "Dongle", sans-serif;
+    color: #2c6e49;
+    background-color: #f6f4d2;
+    font-size: 2.5rem;
+    text-align: center;
+    border-radius: 40px;
+    padding: 8px 20px;
+    margin: 15px 0;
+    cursor: pointer;
+    width: 80%;
+    max-width: 300px;    
+    transition: all 0.3s ease;
+}
+
+.menu-item1 {
+    font-family: "Dongle", sans-serif;
+    color: #2c6e49;
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 10px 0;
+    cursor: pointer;   
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    color: #f6f4d2;
+    background-color: #7fb685;
+    transform: translateY(-2px);
+}
+
+.menu-item1:hover {
+    color: #f6f4d2;
+    transform: translateY(-2px);
+}
