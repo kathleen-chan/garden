@@ -158,6 +158,13 @@ removeGardenBtn.addEventListener('click', function () {
         saveGardens();
         renderGardens();
         selectedGardenIndex = -1;
+
+        renderGardens();
+        
+        // Explicitly update the counter when gardens array is empty
+        if (gardens.length === 0) {
+            document.querySelector('.garden-counter').textContent = '';
+        }
     }
 });
 
