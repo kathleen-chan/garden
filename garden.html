@@ -28,22 +28,44 @@
         <button type="submit" id="enter" class="enter">enter</button>
     </div>
 
+    <!-- Menu -->
     <div id="menu">
         <div class="menu-item" id="new-garden">˖˚ new garden *˖</div>
         <div class="menu-item" id="growing-gardens">˖* growing gardens ˚˖</div>
         <div class="menu-item1" id="menu-back">* ༘˚ back .☘︎ ݁˖</div>
     </div>
 
+    <!-- New garden page -->
     <div id="new-garden-pg">
+        <div class="biome-switch">
+            <span class="arrow" id="biome-prev"><</span>
+                    <div class="new-world-container" id="new-world-container">
+                        <img id="biome-display" src="" alt="selected biome">
+                    </div>
+                    <span class="arrow" id="biome-next">></span>
+        </div>
+        <div class="world-name-input">
+            <input type="text" id="world-name" placeholder="enter garden name" maxlength="20">
+            <button type="submit" class="create-btn" id="create-world">create</button>
+        </div>
         <div class="menu-item1" id="new-garden-back">* ༘˚ back .☘︎ ݁˖</div>
     </div>
 
+    <!-- Growing gardens page -->
+    <!-- These are the gardens that have been created -->
     <div id="growing-gardens-pg">
-        <div class="menu-item1" id="growing-gardens-back">* ༘˚ back .☘︎ ݁˖</div>
+        <div class="worlds-container" id="worlds-container">
+            <div class="empty-message">no gardens yet - create one!</div>
+        </div>
+        <div class="garden-controls">
+            <button type="submit" class="remove-garden" id="remove">remove garden</button>
+            <div class="garden-counter"></div>
+            <div class="menu-item1" id="growing-gardens-back">* ༘˚ back .☘︎ ݁˖</div>
+        </div>
     </div>
 
-    <!-- JavaScript -->
-    <script src="garden.js"></script>
+        <!-- JavaScript -->
+        <script src="garden.js"></script>
 
 </body>
 
