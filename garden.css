@@ -25,6 +25,12 @@ body {
     align-items: center;
     padding: 20px;
     transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+.game-container .character {
+    bottom: 20%; /* Adjust this to position characters where you want */
+    z-index: 5; /* Below the title and button */
 }
 
 #menu,
@@ -406,4 +412,40 @@ body {
     font-family: "Dongle", sans-serif;
     font-size: 1.8rem;
     animation: fadeInOut 2s ease-in-out;
+}
+
+.character {
+    position: absolute;
+    bottom: 100px;
+    height: 100px;
+    width: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+    z-index: 10;
+    transition: left 0.5s linear;
+}
+
+.character {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    image-rendering: pixelated;
+    transition: transform 0.2s ease;
+    z-index: 10;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0) scaleX(var(--direction)); }
+    50% { transform: translateY(-5px) scaleX(var(--direction)); }
+    100% { transform: translateY(0) scaleX(var(--direction)); }
+}
+
+.flying {
+    animation: fly 0.8s ease-in-out infinite;
+}
+
+.walking {
+    animation: walk 0.5s steps(2) infinite;
 }
