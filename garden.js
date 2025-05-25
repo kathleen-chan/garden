@@ -2,12 +2,12 @@ const gameContainer = document.querySelector('.game-container');
 const enter = document.getElementById('enter');
 const menu = document.getElementById('menu');
 const menuBack = document.getElementById('menu-back');
-const newGarden = document.getElementById('new-garden');
-const newGardenPg = document.getElementById('new-garden-pg');
-const newGardenBack = document.getElementById('new-garden-back');
-const growingGardens = document.getElementById('growing-gardens');
-const growingGardensPg = document.getElementById('growing-gardens-pg');
-const growingGardensBack = document.getElementById('growing-gardens-back');
+const newWorld = document.getElementById('new-world');
+const newWorldPg = document.getElementById('new-world-pg');
+const newWorldBack = document.getElementById('new-world-back');
+const growingWorlds = document.getElementById('growing-worlds');
+const growingWorldsPg = document.getElementById('growing-worlds-pg');
+const growingWorldsBack = document.getElementById('growing-worlds-back');
 const newWorldContainer = document.getElementById('new-world-container');
 const worldForm = document.getElementById('world-form');
 const worldNameInput = document.getElementById('world-name');
@@ -16,19 +16,19 @@ const createWorldBtn = document.getElementById('create-world');
 const biomePrev = document.getElementById('biome-prev');
 const biomeNext = document.getElementById('biome-next');
 const biomeDisplay = document.getElementById('biome-display');
-const removeGardenBtn = document.getElementById('remove');
+const removeWorldBtn = document.getElementById('remove');
 
 enter.addEventListener('click', () => transition(gameContainer, menu));
 menuBack.addEventListener('click', () => transition(menu, gameContainer));
-newGarden.addEventListener('click', () => transition(menu, newGardenPg));
-newGardenBack.addEventListener('click', () => transition(newGardenPg, menu));
-growingGardens.addEventListener('click', () => transition(menu, growingGardensPg));
-growingGardensBack.addEventListener('click', () => transition(growingGardensPg, menu));
+newWorld.addEventListener('click', () => transition(menu, newWorldPg));
+newWorldBack.addEventListener('click', () => transition(newWorldPg, menu));
+growingWorlds.addEventListener('click', () => transition(menu, growingWorldsPg));
+growingWorldsBack.addEventListener('click', () => transition(growingWorldsPg, menu));
 
-const MAX_GARDENS = 5;
-let gardens = JSON.parse(localStorage.getItem('gardens')) || [];
+const MAX_WORLDS = 3;
+let worlds = JSON.parse(localStorage.getItem('worlds')) || [];
 let currentBiomeIndex = 0;
-let selectedGardenIndex = -1;
+let selectedWorldIndex = -1;
 
 const biomes = [
     { name: "field", image: "field.png" },
@@ -57,16 +57,16 @@ function updateBiomeDisplay() {
     biomeDisplay.alt = biomes[currentBiomeIndex].name;
 }
 
-// Create new garden
+// Create new world
 function createNewWorld() {
-    if (gardens.length >= MAX_GARDENS) {
-        showAlert(`Maximum of ${MAX_GARDENS} gardens reached! Please remove one first.`);
+    if (worlds.length >= MAX_WORLDS) {
+        showAlert(`Maximum of ${MAX_WORLDS} worlds reached! Please remove one first.`);
         return;
     }
 
     const name = worldNameInput.value.trim();
     if (name === '') {
-        showAlert('Please enter a garden name');
+        showAlert('Please enter a world name');
         return;
     }
 
@@ -76,49 +76,49 @@ function createNewWorld() {
         biomeImage: biomes[currentBiomeIndex].image
     };
 
-    gardens.push(newWorld);
-    saveGardens();
-    renderGardens();
+    worlds.push(newWorld);
+    saveWorlds();
+    renderWorlds();
     worldNameInput.value = '';
-    transition(newGardenPg, growingGardensPg);
+    transition(newWorldPg, growingWorldsPg);
 }
 
-// Created gardens in growing gardens
-function renderGardens() {
+// Created worlds in growing worlds
+function renderWorlds() {
     worldsContainer.innerHTML = '';
 
-    if (gardens.length === 0) {
-        worldsContainer.innerHTML = '<div class="empty-message">no gardens yet - create one!</div>';
-        removeGardenBtn.style.display = 'none';
+    if (worlds.length === 0) {
+        worldsContainer.innerHTML = '<div class="empty-message">no worlds yet - create one!</div>';
+        removeWorldBtn.style.display = 'none';
         return;
     }
 
-    removeGardenBtn.style.display = 'block';
+    removeWorldBtn.style.display = 'block';
     const gridContainer = document.createElement('div');
-    gridContainer.className = 'gardens-grid';
+    gridContainer.className = 'worlds-grid';
 
-    gardens.forEach((world, index) => {
+    worlds.forEach((world, index) => {
         const worldBox = document.createElement('div');
         worldBox.className = 'world-box';
-        if (index === selectedGardenIndex) {
+        if (index === selectedWorldIndex) {
             worldBox.classList.add('selected');
         }
         worldBox.dataset.index = index;
-        worldBox.innerHTML = `<img src="${world.biomeImage}" alt="${world.biome}" class="garden-image">
+        worldBox.innerHTML = `<img src="${world.biomeImage}" alt="${world.biome}" class="world-image">
             <div class="world-info">
             <div class="world-title">${world.name}</div>
             <div class="world-biome">${world.biome}</div>
             </div>`;
         worldBox.addEventListener('click', function () {
-            if (selectedGardenIndex === index) {
+            if (selectedWorldIndex === index) {
                 this.classList.remove('selected');
-                selectedGardenIndex = -1;
+                selectedWorldIndex = -1;
             } else {
                 document.querySelectorAll('.world-box').forEach(box => {
                     box.classList.remove('selected');
                 });
                 this.classList.add('selected');
-                selectedGardenIndex = index;
+                selectedWorldIndex = index;
             }
         });
 
@@ -127,7 +127,7 @@ function renderGardens() {
 
     worldsContainer.appendChild(gridContainer);
 
-    document.querySelector('.garden-counter').textContent = `${gardens.length}/${MAX_GARDENS} gardens`;
+    document.querySelector('.world-counter').textContent = `${worlds.length}/${MAX_WORLDS} worlds`;
 }
 
 function showAlert(message) {
@@ -146,30 +146,29 @@ function showAlert(message) {
     }, 2000);
 }
 
-// Remove selected garden
-removeGardenBtn.addEventListener('click', function () {
-    if (selectedGardenIndex === -1) {
-        showAlert('Please select a garden first by clicking on it');
+// Remove selected world
+removeWorldBtn.addEventListener('click', function () {
+    if (selectedWorldIndex === -1) {
+        showAlert('Please select a world first by clicking on it');
         return;
     }
 
-    if (confirm('Are you sure you want to remove this garden?')) {
-        gardens.splice(selectedGardenIndex, 1);
-        saveGardens();
-        renderGardens();
-        selectedGardenIndex = -1;
+    if (confirm('Are you sure you want to remove this world?')) {
+        worlds.splice(selectedWorldIndex, 1);
+        saveWorlds();
+        renderWorlds();
+        selectedWorldIndex = -1;
 
-        renderGardens();
+        renderWorlds();
         
-        // Explicitly update the counter when gardens array is empty
-        if (gardens.length === 0) {
-            document.querySelector('.garden-counter').textContent = '';
+        if (worlds.length === 0) {
+            document.querySelector('.world-counter').textContent = '';
         }
     }
 });
 
-function saveGardens() {
-    localStorage.setItem('gardens', JSON.stringify(gardens));
+function saveWorlds() {
+    localStorage.setItem('worlds', JSON.stringify(worlds));
 }
 
 createWorldBtn.addEventListener('click', createNewWorld);
@@ -188,5 +187,5 @@ biomeNext.addEventListener('click', () => {
 });
 
 updateBiomeDisplay();
-renderGardens();
+renderWorlds();
 
