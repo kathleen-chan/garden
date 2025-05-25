@@ -2,6 +2,10 @@ const gameContainer = document.querySelector('.game-container');
 const enter = document.getElementById('enter');
 const menu = document.getElementById('menu');
 const menuBack = document.getElementById('menu-back');
+const settingsBtn = document.getElementById('settings-btn');
+const settingsPopup = document.getElementById('settings-popup');
+const closeSettings = document.querySelector('.close-settings');
+const saveSettings = document.querySelector('.settings-save-btn');
 const newWorld = document.getElementById('new-world');
 const newWorldPg = document.getElementById('new-world-pg');
 const newWorldBack = document.getElementById('new-world-back');
@@ -51,6 +55,29 @@ function transition(fromScreen, toScreen) {
     }, 500);
 }
 
+//Settings popup
+document.querySelectorAll('.settings-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        settingsPopup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    });
+});
+
+closeSettings.addEventListener('click', function() {
+    settingsPopup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+});
+
+saveSettings.addEventListener('click', function() {
+    const volume = document.getElementById('volume-control').value;
+    localStorage.setItem('gameVolume', volume);
+
+    settingsPopup.style.display = 'none';
+    document.body.style.overflow = 'auto';
+
+    showAlert('Settings saved!');
+});
+
 // Update biome pictures
 function updateBiomeDisplay() {
     biomeDisplay.src = biomes[currentBiomeIndex].image;
@@ -83,7 +110,12 @@ function createNewWorld() {
     transition(newWorldPg, growingWorldsPg);
 }
 
-// Created worlds in growing worlds
+createWorldBtn.addEventListener('click', createNewWorld);
+worldNameInput.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') createNewWorld();
+});
+
+// User's created worlds w/ max 3 worlds
 function renderWorlds() {
     worldsContainer.innerHTML = '';
 
@@ -172,11 +204,7 @@ function saveWorlds() {
     localStorage.setItem('worlds', JSON.stringify(worlds));
 }
 
-createWorldBtn.addEventListener('click', createNewWorld);
-worldNameInput.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') createNewWorld();
-});
-
+//Biome image slider
 biomePrev.addEventListener('click', () => {
     currentBiomeIndex = (currentBiomeIndex - 1 + biomes.length) % biomes.length;
     updateBiomeDisplay();
@@ -187,6 +215,7 @@ biomeNext.addEventListener('click', () => {
     updateBiomeDisplay();
 });
 
+//Initializing
 updateBiomeDisplay();
 renderWorlds();
 

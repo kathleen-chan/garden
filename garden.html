@@ -23,6 +23,7 @@
 
 <body id="body">
 
+    <!-- Main screen -->
     <div class="game-container">
         <h1 class="manjari-regular" id="title-text">oubaitori</h1>
         <button type="submit" id="enter" class="enter">enter</button>
@@ -30,19 +31,35 @@
 
     <!-- Menu -->
     <div id="menu">
+        <img src="mechanics icons/settings.png" class="settings-btn" id="settings-btn" alt="settings">
         <div class="menu-item" id="new-world">˖˚ new world *˖</div>
         <div class="menu-item" id="growing-worlds">˖* growing worlds ˚˖</div>
         <div class="menu-item1" id="menu-back">* ༘˚ back .☘︎ ݁˖</div>
     </div>
 
+    <!-- Settings -->
+     <div id="settings-popup" class="settings-popup">
+        <div class="settings-content">
+            <span class="close-settings">&times;</span>
+            <h2 class="settings-title">settings</h2>
+            <div class="settings-option">
+                <div class="volume-control-container">
+                    <img src="mechanics icons/volume.png" class="volume-icon" id="volume-icon" alt="volume">
+                </div>
+            </div>
+            <button class="settings-save-btn">save settings</button>
+        </div>
+     </div>
+
     <!-- New world page -->
     <div id="new-world-pg">
+        <img src="mechanics icons/settings.png" class="settings-btn" id="settings-btn" alt="settings">
         <div class="biome-switch">
-            <img src="mechanics icons/left-arrow.png" class="arrow" id="biome-prev" alt="Previous biome">
+            <img src="mechanics icons/left-arrow.png" class="arrow" id="biome-prev" alt="previous biome">
                     <div class="new-world-container" id="new-world-container">
                         <img id="biome-display" src="" alt="selected biome">
                     </div>
-                    <img src="mechanics icons/right-arrow.png" class="arrow" id="biome-next" alt="Next biome">
+                    <img src="mechanics icons/right-arrow.png" class="arrow" id="biome-next" alt="next biome">
         </div>
         <div class="world-name-input">
             <input type="text" id="world-name" placeholder="enter world name" maxlength="20">
@@ -54,6 +71,7 @@
     <!-- Growing worlds page -->
     <!-- These are the worlds that have been created -->
     <div id="growing-worlds-pg">
+        <img src="mechanics icons/settings.png" class="settings-btn" id="settings-btn" alt="settings">
         <div class="worlds-container" id="worlds-container">
             <div class="empty-message">no worlds yet - create one!</div>
         </div>
@@ -64,8 +82,8 @@
         </div>
     </div>
 
-        <!-- JavaScript -->
-        <script src="garden.js"></script>
+    <!-- JavaScript -->
+    <script src="garden.js"></script>
 
 </body>
 
