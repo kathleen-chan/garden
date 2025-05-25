@@ -108,6 +108,7 @@ function renderWorlds() {
             <div class="world-info">
             <div class="world-title">${world.name}</div>
             <div class="world-biome">${world.biome}</div>
+            <button type="submit" class="enter-world" id="enter-world">enter world</button>
             </div>`;
         worldBox.addEventListener('click', function () {
             if (selectedWorldIndex === index) {
