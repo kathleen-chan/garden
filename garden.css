@@ -1,3 +1,21 @@
+body {
+    cursor: url('mechanics\ icons/cursor.png'), auto;
+}
+
+* {
+  cursor: none !important;
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 26px;
+  height: 32px;
+  background-image: url('mechanics\ icons/cursor.png');
+  background-size: contain;
+  pointer-events: none;
+  z-index: 9999;
+}
+
 .manjari-regular {
     font-family: "Manjari", sans-serif;
     color: #2c6e49;

@@ -9,6 +9,20 @@ const saveSettings = document.querySelector('.settings-save-btn');
 const newWorld = document.getElementById('new-world');
 const growingWorlds = document.getElementById('growing-worlds');
 
+document.addEventListener('DOMContentLoaded', function() {
+  const cursor = document.createElement('div');
+  cursor.className = 'custom-cursor';
+  document.body.appendChild(cursor);
+  
+  document.body.classList.add('custom-cursor-enabled');
+  
+  // Track mouse movement
+  document.addEventListener('mousemove', function(e) {
+    cursor.style.left = (e.clientX - 5) + 'px'; 
+    cursor.style.top = (e.clientY - 5) + 'px';
+  });
+});
+
 enter.addEventListener('click', () => transition(gameContainer, menu));
 menuBack.addEventListener('click', () => transition(menu, gameContainer));
 newWorld.addEventListener('click', () => transition(menu, newWorldPg));
@@ -86,7 +100,7 @@ function saveWorlds() {
 // Birb animation
 const characters = {
     birb: {
-        wingStates: ["characters/birb-wings-middle.png", "characters/birb-wings-high.png", "characters/birb-jump.png"],
+        wingStates: ["characters/birb-wings-middle.png", "characters/birb-wings-high.png"],
         frameWidth: 150,
         frameHeight: 150,
         minSpeed: 0.5,
@@ -151,7 +165,7 @@ function createCharacter(type, startX, startY = null) {
 
 function animateCharacters(timestamp) {
     if (!lastTimestamp) lastTimestamp = timestamp;
-    const deltaTime = Math.min(timestamp - lastTimestamp, 100);
+    const deltaTime = Math.min(timestamp - lastTimestamp, 1000);
     lastTimestamp = timestamp;
 
     activeCharacters.forEach(char => {

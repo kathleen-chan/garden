@@ -12,7 +12,7 @@ let currentBiomeIndex = 0;
 const biomes = [
     { name: "field", image: "field.png" },
     { name: "cherry blossom", image: "cherry_blossom.png" },
-    { name: "dessert", image: "dessert.png" },
+    { name: "desert", image: "desert.png" },
     { name: "snowy mountain", image: "snowy_mountain.png" }
 ];
 

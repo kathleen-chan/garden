@@ -2,8 +2,23 @@ const growingWorldsPg = document.getElementById('growing-worlds-pg');
 const growingWorldsBack = document.getElementById('growing-worlds-back');
 const worldsContainer = document.getElementById('worlds-container');
 const removeWorldBtn = document.getElementById('remove');
+const enterWorldButtons = document.querySelectorAll('.enter-world');
 
 let selectedWorldIndex = -1;
+
+function setupWorldEnterButtons() {
+    worldsContainer.addEventListener('click', function(e) {
+        if (e.target.classList.contains('enter-world')) {
+            e.preventDefault();
+            const worldBox = e.target.closest('.world-box');
+            const worldIndex = worldBox.dataset.index;
+            const world = worlds[worldIndex];
+            localStorage.setItem('currentWorld', JSON.stringify(world));
+            window.location.href = window.location.pathname.includes('growing worlds') 
+                ? 'enter_world.html' : 'enter world/enter_world.html';
+        };
+    });
+};
 
 // User's created worlds w/ max 3 worlds
 function renderWorlds() {
@@ -26,13 +41,15 @@ function renderWorlds() {
             worldBox.classList.add('selected');
         }
         worldBox.dataset.index = index;
-        worldBox.innerHTML = `<img src="${world.biomeImage}" alt="${world.biome}" class="world-image">
-            <div class="world-info">
+        worldBox.innerHTML = `
             <div class="world-title">${world.name}</div>
+            <img src="${world.biomeImage}" alt="${world.biome}" class="world-image">
+            <div class="world-info">
             <div class="world-biome">${world.biome}</div>
             <button type="submit" class="enter-world" id="enter-world">enter world</button>
             </div>`;
-        worldBox.addEventListener('click', function () {
+        worldBox.addEventListener('click', function(e) {
+            if (e.target.classList.contains('enter-world')) return;
             if (selectedWorldIndex === index) {
                 this.classList.remove('selected');
                 selectedWorldIndex = -1;
@@ -51,6 +68,7 @@ function renderWorlds() {
     worldsContainer.appendChild(gridContainer);
 
     document.querySelector('.world-counter').textContent = `${worlds.length}/${MAX_WORLDS} worlds`;
+    setupWorldEnterButtons();
 }
 
 // Remove selected world

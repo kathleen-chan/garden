@@ -1,0 +1,64 @@
+body {
+    position: relative; 
+    min-height: 100vh;
+    margin: 0;
+}
+
+body.biome-field {
+    --light-color: #7fb685;
+    --primary-color: #4c956c;
+    --accent-color: #f6f4d2;
+    --bg-color: #d4e09b;
+    --text-color: #2c6e49;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.biome-cherry-blossom {
+    --light-color: #ff8fa3;
+    --primary-color: #fb6f92;
+    --accent-color: #ffccd5;
+    --bg-color: #ffb7c5;
+    --text-color: #800f2f;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.biome-desert {
+    --primary-color: #c97b41;
+    --accent-color: #e0ac69;
+    --bg-color: #f4e2d8;
+    --text-color: #5e3c2f;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+body.biome-snowy-mountain {
+    --light-color: #8ecae6;
+    --primary-color: #01579b;
+    --accent-color: #468faf;
+    --bg-color: #a9d6e5;
+    --text-color: #01579b;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.world-container {
+    width: 100%;
+    min-height: 100vh; 
+    position: relative;
+    border: none;
+}
+
+.world-content {
+    width: 100%;
+    min-height: 100vh;
+    border: none !important;
+    padding: 2rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
