@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Settings open
-    if (settingsBtn && settingsPopup) { 
+    if (settingsBtn && settingsPopup) {
         settingsBtn.addEventListener('click', function () {
             settingsPopup.style.display = 'flex';
             document.body.style.overflow = 'hidden';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Settings close
-    if (closeSettings) { // Added null check
+    if (closeSettings) {
         closeSettings.addEventListener('click', function () {
             if (settingsPopup) {
                 settingsPopup.style.display = 'none';
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Save settings
-    if (saveSettings && settingsPopup && volumeControl) { // Added null checks
+    if (saveSettings && settingsPopup && volumeControl) {
         saveSettings.addEventListener('click', function () {
             const volume = volumeControl.value;
             localStorage.setItem('gameVolume', volume);
@@ -52,16 +52,15 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadWorldContent(worldData) {
     const worldContent = document.querySelector('.world-content');
     const body = document.body;
-    const worldContainer = document.querySelector('.world-container');
 
-    if (!worldContent || !body || !worldContainer) return;
+    if (!worldContent || !body) return;
 
     body.classList.remove('biome-field', 'biome-cherry', 'biome-desert', 'biome-snowy');
     
     const biomeClass = 'biome-' + worldData.biome.toLowerCase().replace(/\s+/g, '-');
     body.classList.add(biomeClass);
 
-    const biomeImageSrc = `biomes/${worldData.biome.toLowerCase().replace(/\s+/g, '')}.png`;
+    const biomeImageSrc = `../biomes/${worldData.biome.toLowerCase().replace(/\s+/g, '')}.png`;
     const biomeAltText = `${worldData.biome} biome`;
 
     worldContent.innerHTML = `
@@ -74,20 +73,40 @@ function loadWorldContent(worldData) {
 }
 
 function applyBiomeStyles(biomeClass) {
-    const root = document.documentElement;
     const content = document.querySelector('.world-content');
-    
     const bodyStyles = window.getComputedStyle(document.body);
-    
+
     if (content) {
         content.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
         content.style.color = bodyStyles.getPropertyValue('--text-color');
         content.style.border = `2px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
     }
-    
+
+    // Style all buttons
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.style.backgroundColor = bodyStyles.getPropertyValue('--primary-color');
         button.style.color = bodyStyles.getPropertyValue('--accent-color');
     });
+
+    // Apply biome colors to the settings popup
+    const settingsPopup = document.getElementById('settings-popup');
+    if (settingsPopup) {
+        settingsPopup.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
+        settingsPopup.style.color = bodyStyles.getPropertyValue('--text-color');
+        settingsPopup.style.border = `2px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
+
+        const popupButtons = settingsPopup.querySelectorAll('button');
+        popupButtons.forEach(button => {
+            button.style.backgroundColor = bodyStyles.getPropertyValue('--primary-color');
+            button.style.color = bodyStyles.getPropertyValue('--accent-color');
+        });
+
+        const inputs = settingsPopup.querySelectorAll('input, select');
+        inputs.forEach(input => {
+            input.style.border = `1px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
+            input.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
+            input.style.color = bodyStyles.getPropertyValue('--text-color');
+        });
+    }
 }
