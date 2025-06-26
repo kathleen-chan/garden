@@ -4,6 +4,13 @@ const worldsContainer = document.getElementById('worlds-container');
 const removeWorldBtn = document.getElementById('remove');
 const enterWorldButtons = document.querySelectorAll('.enter-world');
 
+const BIOME_IMAGES = {
+            'field': 'field.png',
+            'cherryblossom': 'cherryblossom.png',
+            'desert': 'desert.png',            
+            'snowymountain': 'snowymountain.png'
+        };
+
 let selectedWorldIndex = -1;
 
 function setupWorldEnterButtons() {
@@ -41,9 +48,13 @@ function renderWorlds() {
             worldBox.classList.add('selected');
         }
         worldBox.dataset.index = index;
+
+        const biomeKey = world.biome.toLowerCase().replace(/\s+/g, '');
+        const biomeImage = BIOME_IMAGES[biomeKey];
+
         worldBox.innerHTML = `
             <div class="world-title">${world.name}</div>
-            <img src="${world.biomeImage}" alt="${world.biome}" class="world-image">
+            <img src="biomes/${biomeImage}" alt="${world.biome}" class="world-image">
             <div class="world-info">
             <div class="world-biome">${world.biome}</div>
             <button type="submit" class="enter-world" id="enter-world">enter world</button>

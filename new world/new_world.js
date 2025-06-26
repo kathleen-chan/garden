@@ -10,10 +10,10 @@ const biomeDisplay = document.getElementById('biome-display');
 
 let currentBiomeIndex = 0;
 const biomes = [
-    { name: "field", image: "field.png" },
-    { name: "cherry blossom", image: "cherry_blossom.png" },
-    { name: "desert", image: "desert.png" },
-    { name: "snowy mountain", image: "snowy_mountain.png" }
+    { name: "field", image: "biomes/field.png" },
+    { name: "cherry blossom", image: "biomes/cherryblossom.png" },
+    { name: "desert", image: "biomes/desert.png" },
+    { name: "snowy mountain", image: "biomes/snowymountain.png" }
 ];
 
 //Biome image slider
