@@ -8,6 +8,7 @@ const closeSettings = document.querySelector('.close-settings');
 const saveSettings = document.querySelector('.settings-save-btn');
 const newWorld = document.getElementById('new-world');
 const growingWorlds = document.getElementById('growing-worlds');
+const backgroundMusic = new Audio('bgm/gardenia.mp3');
 
 document.addEventListener('DOMContentLoaded', function() {
   const cursor = document.createElement('div');
@@ -23,10 +24,25 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-enter.addEventListener('click', () => transition(gameContainer, menu));
 menuBack.addEventListener('click', () => transition(menu, gameContainer));
 newWorld.addEventListener('click', () => transition(menu, newWorldPg));
 growingWorlds.addEventListener('click', () => transition(menu, growingWorldsPg));
+
+// Audio
+backgroundMusic.loop = true;
+enter.addEventListener('click', () => {
+    const savedVolume = localStorage.getItem('gameVolume') || 0.5;
+    backgroundMusic.volume = savedVolume;
+    
+    backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
+    transition(gameContainer, menu);
+});
+
+saveSettings.addEventListener('click', function() {
+    const volume = document.getElementById('volume-control').value;
+    localStorage.setItem('gameVolume', volume);
+    backgroundMusic.volume = volume;
+})
 
 const MAX_WORLDS = 3;
 let worlds = JSON.parse(localStorage.getItem('worlds')) || [];
