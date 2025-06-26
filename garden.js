@@ -11,16 +11,17 @@ const growingWorlds = document.getElementById('growing-worlds');
 const backgroundMusic = new Audio('bgm/gardenia.mp3');
 
 document.addEventListener('DOMContentLoaded', function() {
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  document.body.appendChild(cursor);
+    setupVolumeControl();
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
   
-  document.body.classList.add('custom-cursor-enabled');
+    document.body.classList.add('custom-cursor-enabled');
   
-  // Track mouse movement
-  document.addEventListener('mousemove', function(e) {
-    cursor.style.left = (e.clientX - 5) + 'px'; 
-    cursor.style.top = (e.clientY - 5) + 'px';
+    // Track mouse movement
+    document.addEventListener('mousemove', function(e) {
+        cursor.style.left = (e.clientX - 5) + 'px'; 
+        cursor.style.top = (e.clientY - 5) + 'px';
   });
 });
 
@@ -28,24 +29,31 @@ menuBack.addEventListener('click', () => transition(menu, gameContainer));
 newWorld.addEventListener('click', () => transition(menu, newWorldPg));
 growingWorlds.addEventListener('click', () => transition(menu, growingWorldsPg));
 
+const MAX_WORLDS = 3;
+let worlds = JSON.parse(localStorage.getItem('worlds')) || [];
+
 // Audio
+let audioInitialized = false;
+let pendingVolume = null;
+let currentVolume = localStorage.getItem('gameVolume') || 0.5;
 backgroundMusic.loop = true;
+backgroundMusic.volume = currentVolume;
+
+function setupVolumeControl() {
+    const volumeControl = document.getElementById('sound');
+    volumeControl.value = currentVolume * 100;
+    audioInitialized = true;
+
+    volumeControl.addEventListener('input', () => {
+        pendingVolume = volumeControl.value / 100;
+        backgroundMusic.volume = pendingVolume;
+    });
+}
+
 enter.addEventListener('click', () => {
-    const savedVolume = localStorage.getItem('gameVolume') || 0.5;
-    backgroundMusic.volume = savedVolume;
-    
     backgroundMusic.play().catch(e => console.log("Autoplay prevented:", e));
     transition(gameContainer, menu);
 });
-
-saveSettings.addEventListener('click', function() {
-    const volume = document.getElementById('volume-control').value;
-    localStorage.setItem('gameVolume', volume);
-    backgroundMusic.volume = volume;
-})
-
-const MAX_WORLDS = 3;
-let worlds = JSON.parse(localStorage.getItem('worlds')) || [];
 
 // Page transitions
 function transition(fromScreen, toScreen) {
@@ -79,17 +87,25 @@ document.querySelectorAll('.settings-btn').forEach(btn => {
 });
 
 closeSettings.addEventListener('click', function () {
+    if(pendingVolume !== null) {
+        document.getElementById('sound').value = currentVolume * 100;
+        backgroundMusic.volume = currentVolume;
+        pendingVolume = null;
+    }
+
     settingsPopup.style.display = 'none';
     document.body.style.overflow = 'auto';
 });
 
-saveSettings.addEventListener('click', function () {
-    const volume = document.getElementById('volume-control').value;
-    localStorage.setItem('gameVolume', volume);
+saveSettings.addEventListener('click', function() {
+    if (pendingVolume !== null) {
+        currentVolume = pendingVolume;
+        localStorage.setItem('gameVolume', currentVolume);
+        pendingVolume = null;
+    }
 
     settingsPopup.style.display = 'none';
     document.body.style.overflow = 'auto';
-
     showAlert('Settings saved!');
 });
 
