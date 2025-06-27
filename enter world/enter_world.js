@@ -79,34 +79,5 @@ function applyBiomeStyles(biomeClass) {
     if (content) {
         content.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
         content.style.color = bodyStyles.getPropertyValue('--text-color');
-        content.style.border = `2px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
-    }
-
-    // Style all buttons
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        button.style.backgroundColor = bodyStyles.getPropertyValue('--primary-color');
-        button.style.color = bodyStyles.getPropertyValue('--accent-color');
-    });
-
-    // Apply biome colors to the settings popup
-    const settingsPopup = document.getElementById('settings-popup');
-    if (settingsPopup) {
-        settingsPopup.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
-        settingsPopup.style.color = bodyStyles.getPropertyValue('--text-color');
-        settingsPopup.style.border = `2px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
-
-        const popupButtons = settingsPopup.querySelectorAll('button');
-        popupButtons.forEach(button => {
-            button.style.backgroundColor = bodyStyles.getPropertyValue('--primary-color');
-            button.style.color = bodyStyles.getPropertyValue('--accent-color');
-        });
-
-        const inputs = settingsPopup.querySelectorAll('input, select');
-        inputs.forEach(input => {
-            input.style.border = `1px solid ${bodyStyles.getPropertyValue('--primary-color')}`;
-            input.style.backgroundColor = bodyStyles.getPropertyValue('--bg-color');
-            input.style.color = bodyStyles.getPropertyValue('--text-color');
-        });
     }
 }

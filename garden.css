@@ -172,6 +172,16 @@ body {
     height: 30px;
 }
 
+.settings-option input[type="range"] {
+    width: 200px;
+    margin: 10px 0;
+    margin-left: 12px;
+}
+
+#sound {
+    accent-color: #7fb685;
+}
+
 .close-settings {
     position: absolute;
     top: 4px;

@@ -33,6 +33,15 @@
         </div>
     </div>
 
+    <!-- Tasks -->
+     <img src="../mechanics icons/tasks.png" class="tasks-btn" id="tasks-btn" alt="tasks">
+     <div id="tasks-popup" class="tasks-popup">
+        <div class="tasks-content">
+            <span class="close-tasks">&times;</span>
+            <h2 class="tasks-title">tasks</h2>
+        </div>
+     </div>
+
     <!-- Settings -->
     <img src="../mechanics icons/settings.png" class="settings-btn" id="settings-btn" alt="settings">
     <div id="settings-popup" class="settings-popup">
@@ -42,6 +51,7 @@
             <div class="settings-option">
                 <div class="volume-control-container">
                     <img src="../mechanics icons/volume.png" class="volume-icon" id="volume-icon" alt="volume">
+                    <input type="range" id="sound" name="sound" min="0" max="100" value="50">
                 </div>
             </div>
             <button class="settings-save-btn">save settings</button>
