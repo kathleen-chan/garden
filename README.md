@@ -32,6 +32,3 @@ This project was developed using:
 - Add world and gardening features.
 - Add plants and decorations.
 - Expand world customization options.
-
-Happy gardening! 🌷
-```
